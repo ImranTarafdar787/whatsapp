@@ -3,9 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Flight Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-container button:hover {
+            background: #0056b3;
+        }
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 15px;
+            }
+            .form-container h1 {
+                font-size: 20px;
+            }
+            .form-container label, .form-container input, .form-container button {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-    hi
+    <div class="form-container">
+        <h1>Flight Search</h1>
+        <form id="flightForm">
+            <label for="departureDate">Departure Date:</label>
+            <input type="date" id="departureDate" name="departureDate" required>
+
+            <label for="returnDate">Return Date:</label>
+            <input type="date" id="returnDate" name="returnDate">
+
+            <label for="numTickets">Number of Tickets:</label>
+            <input type="number" id="numTickets" name="numTickets" required>
+
+            <label for="airline">Preferred Airline:</label>
+            <input type="text" id="airline" name="airline">
+
+            <button type="submit">Send to WhatsApp</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('flightForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const departureDate = document.getElementById('departureDate').value;
+            const returnDate = document.getElementById('returnDate').value;
+            const numTickets = document.getElementById('numTickets').value;
+            const airline = document.getElementById('airline').value;
+
+            const message = `Departure Date: ${departureDate}\nReturn Date: ${returnDate}\nNumber of Tickets: ${numTickets}\nPreferred Airline: ${airline}`;
+            const whatsappUrl = `https://wa.me/60172335577?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
 </body>
 </html>
